@@ -10,9 +10,9 @@ const mongoose = require("mongoose");
       mobile_no: String,
       address: String,
       access: String,
+      type: String,
       url: String,
-      password: String,
-      verified: String
+      password: String
     },
     { 
       timestamps: true 

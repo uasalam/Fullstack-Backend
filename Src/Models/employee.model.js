@@ -11,10 +11,8 @@ const mongoose = require("mongoose");
       address: String,
       access: String,
       type: String,
-      vendor: String,
       url: String,
-      password: String,
-      verified: String
+      password: String
     },
     { 
       timestamps: true 

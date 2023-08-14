@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
       id: String,
       item_name: String,
       brand: String,
-      quantity: String,
       description: String,
       url: String,
       type: String,

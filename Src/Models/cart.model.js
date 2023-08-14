@@ -2,15 +2,15 @@ const mongoose = require("mongoose");
 
     const ProductSchema = new mongoose.Schema(
         {
-        id: String,
-        item_name: String,
-        price: String,
-        quantity: String,
-        url: String,
-        product_total: String
+          id: String,
+          item_name: String,
+          price: String,
+          quantity: String,
+          url: String,
+          product_total: String
         },
         { 
-        timestamps: true 
+          timestamps: true 
         }
     );
 
