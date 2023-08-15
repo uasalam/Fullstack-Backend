@@ -5,11 +5,6 @@ const mongoose = require("mongoose");
           id: String,
           item_name: String,
           brand: String,
-          category: String,
-          type: String,
-          description: String,
-          price: String,
-          url: String,
           product_total: String
         },
         { 
@@ -24,13 +19,11 @@ const mongoose = require("mongoose");
         customer_name: String,
         customer_phone: String,
         payment_type: String,
+        url: String,
         total: String,
-        date: Date,
-        time: Date,
-        order_desciption: String,
+        date: String,
         status: String,
         rejected_reasons: String,
-        rejected_reasons_description: String,
         products: [ProductSchema]
       },
       { 
