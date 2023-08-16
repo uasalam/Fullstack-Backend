@@ -1,7 +1,7 @@
 const file = require( "../Services/order.service" );
 const FileService = new file();
 
-module.exports = { createOrder , getOrder, getOrderId , deleteOrderId , updateStatus , updateOrder , getUserOrders};
+module.exports = { createOrder , getOrder, getAllOrders , getOrderId , deleteOrderId , updateStatus , updateOrder , getUserOrders};
 
 /**
  * @description Create a record with the provided body
@@ -36,6 +36,24 @@ async function getOrder ( req, res ) {
     res.status( 500 ).send( { Status: 500 , Success: false, Error : `${err.name} : ${err.message}`  } );
   }
 }
+
+
+/**
+ * @description Create a record with the provided body
+ * @param req {object} Express req object 
+ * @param res {object} Express res object
+ * @returns status success or failure
+ */
+async function getAllOrders ( req, res ) {
+  try {
+    const result = await FileService.findAll( req.body);
+    return res.send( result );
+  } catch ( err ) {
+    console.log( err ); 
+    res.status( 500 ).send( { Status: 500 , Success: false, Error : `${err.name} : ${err.message}`  } );
+  }
+}
+
 
 
 /**

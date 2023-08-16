@@ -1,6 +1,8 @@
 const MongooseService = require('../Utils/functions'); // Data Access Layer
 const FileModel = require("../Models/customer.model"); // Database Model
 const { registerCustomerValidation } = require("../Validation/customer.validation");
+const aws = require('../Middleware/aws-bucket');  
+const fs = require('fs');
 const bcrypt = require('bcryptjs');
 
 
@@ -175,6 +177,47 @@ class FileService {
         console.log( err)
         return { Status: 500, Error : `${err.name} : ${err.message} `, Location: "./Src/Services/employee.service.js - updatePassword(body)" };
     }
+}
+
+
+/**
+   * @description Attempt to update a post with the provided object
+   * @param body {object} Object containing 'email' field and the updated body
+   * to update specific post
+   * @returns {Object}
+   */
+async updatePicture( body ) {
+  try {    
+
+    console.log(body)
+
+      let imageExist = await this.findOne({ email: body.email });
+      console.log(imageExist)
+
+      await aws.deletefile(imageExist.url);
+
+      let aws_url = await aws.uploadfile(body.url)
+
+
+      fs.unlink(body.url, (err) => {
+        if (err) {
+          throw err;
+        }
+
+        console.log("Deleted File successfully.");
+      });
+
+
+      imageExist.url = aws_url.Location;
+      
+      let process =  await this.MongooseServiceInstance.updateOne({ email: body.email }, imageExist);
+
+      return { url : imageExist.url};
+  } 
+  catch ( err ) {
+      console.log( err)
+      return { Status: 500, Error : `${err.name} : ${err.message} `, Location: "./Src/Services/employee.service.js - updatePic(body)" };
+  }
 }
 
 

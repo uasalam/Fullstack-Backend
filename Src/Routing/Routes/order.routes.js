@@ -6,6 +6,7 @@ let order = require("../../Controllers/order.controller")
 //Routes related to user actions of types temp-admin, staff, lecturer and student
 router.post("/create", order.createOrder);
 router.post("/get", order.getOrder);
+router.post("/get/all", order.getAllOrders);
 router.post("/get/user/orders", order.getUserOrders);
 router.post("/update", order.updateOrder);
 router.post("/update/status", order.updateStatus);

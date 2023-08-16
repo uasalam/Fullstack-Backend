@@ -76,6 +76,22 @@ class FileService {
   }
 
 
+  /**
+  * @description Attempt to create update with the provided object
+  * @param body {object} Object containing all required fields to
+  * create post
+  * @returns {Object}
+  */
+  async findAll(body) {
+    try {
+      return await this.MongooseServiceInstance.find();
+    }
+    catch (err) {
+      console.log(err)
+      return { Status: 500, Error: `${err.name} : ${err.message} `, Location: "./Src/Services/employee.service.js - create(body)" };
+    }
+  }
+
 
   /**
   * @description Attempt to create update with the provided object
