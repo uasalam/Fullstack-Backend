@@ -31,20 +31,6 @@ const mongoose = require("mongoose");
       }
   );
 
-
-//   const CartSchema = new mongoose.Schema(
-//     {
-//       customer_email: String,
-//       total: String,
-//       item_count: String,
-//       products: [ProductSchema],
-//     },
-//     { 
-//       timestamps: true 
-//     }
-//   );
-
-// const Cart = mongoose.model("cart", CartSchema);
 const Order = mongoose.model("order", OrderSchema);
 
 // module.exports.Cart = Cart;

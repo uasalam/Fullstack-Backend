@@ -9,7 +9,7 @@ const expect = chai.expect;
 
 const api = '/api/employee'
 
-//Testing Customer Routes with Error Messages and Success Messages
+//Testing Employee Routes with Error Messages and Success Messages
 
 describe('Employee Routes Tests Suite', () => {    
     

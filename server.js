@@ -19,7 +19,7 @@ let name = config.name
 //Cors(cross origin request) options are set here
 const corsOptions={
     credentials: true, 
-    origin:['https://cms-dle.netlify.app','http://localhost:4200'],
+    origin:['https://pharmacy-backend.netlify.app','http://localhost:4200'],
     //
     //credentials:true,            //access-control-allow-credentials:true
     optionsSuccessStatus:200, // some legacy browsers (IE11, various SmartTVs) choke on 204
@@ -45,13 +45,11 @@ app.use('/', (req, res) => {
         message: 'Server Loaded Successfully',
         Description: name+' RestAPI For a MEAN Application Project',
         Port: port,
+        Url: url,
         BaseUrl: url+port
     });
 })
 
-// app.listen(port, function(){
-//     console.log(`listening on port ${port}`);
-// })
 
 module.exports = app;
 

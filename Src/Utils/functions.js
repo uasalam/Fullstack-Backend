@@ -189,7 +189,7 @@ class MongooseService {
      */
     updateMany ( condition, update, options = { lean: true, new: true } ) {
       return this.model
-        .updateMany( condition, update, options ); //CHECK WHAT THIS IS *******************************#####################**********************************************************************************************
+        .updateMany( condition, update, options ); // *******************************#####################**********************************************************************************************
     }
 
 

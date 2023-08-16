@@ -9,7 +9,7 @@ const expect = chai.expect;
 
 const api = '/api/order'
 
-//Testing Customer Routes with Error Messages and Success Messages
+//Testing Order Routes with Error Messages and Success Messages
 
 describe('Order Routes Tests Suite', () => {
 
