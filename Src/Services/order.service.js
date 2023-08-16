@@ -82,7 +82,7 @@ class FileService {
   * create post
   * @returns {Object}
   */
-  async findAll(body) {
+  async findAll() {
     try {
       return await this.MongooseServiceInstance.find();
     }
@@ -163,6 +163,27 @@ class FileService {
       return { Status: 500, Error: `${err.name} : ${err.message} `, Location: "./Src/Services/employee.service.js - updateStatus(body)" };
     }
   }
+
+
+    /**
+* @description Attempt to create update with the provided object
+* @param body {object} Object containing all required fields to
+* create post
+* @returns {Object}
+*/
+async updateRejectStatus(body) {
+  try {
+    let result = await this.MongooseServiceInstance.updateOne({ id: body.id }, { status: body.status, rejected_reasons : body.rejected_reasons });
+    if(result.modifiedCount === 1){
+      return { message : "success"}
+    }
+    return result;
+  }
+  catch (err) {
+    console.log(err)
+    return { Status: 500, Error: `${err.name} : ${err.message} `, Location: "./Src/Services/employee.service.js - updateStatus(body)" };
+  }
+}
 
 
   /**

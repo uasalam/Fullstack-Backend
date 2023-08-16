@@ -10,6 +10,7 @@ router.post("/get/all", order.getAllOrders);
 router.post("/get/user/orders", order.getUserOrders);
 router.post("/update", order.updateOrder);
 router.post("/update/status", order.updateStatus);
+router.post("/update/reject", order.updateRejectStatus);
 router.post("/get/id", order.getOrderId);
 router.post("/delete/id", order.deleteOrderId);
 

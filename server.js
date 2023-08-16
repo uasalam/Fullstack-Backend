@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
+const socket = require('socket.io');
 
 const app = express();
 
@@ -17,7 +19,7 @@ let name = config.name
 //Cors(cross origin request) options are set here
 const corsOptions={
     credentials: true, 
-    origin:"*",
+    origin:['https://cms-dle.netlify.app','http://localhost:4200'],
     //
     //credentials:true,            //access-control-allow-credentials:true
     optionsSuccessStatus:200, // some legacy browsers (IE11, various SmartTVs) choke on 204
@@ -27,8 +29,14 @@ app.use("/Public/Temp",express.static('Public/Temp'))
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+const rooms = { };
 
-app.use('/api', route)
+  app.get('/get', (req, res) => {
+    console.log(rooms)
+    res.send({rooms:rooms})
+  })
+
+  app.use('/api', route)
 
 //Default Loading for the Server    
 app.use('/', (req, res) => {
@@ -41,8 +49,41 @@ app.use('/', (req, res) => {
     });
 })
 
-app.listen(port, function(){
-    console.log(`listening on port ${port}`);
-})
+// app.listen(port, function(){
+//     console.log(`listening on port ${port}`);
+// })
 
 module.exports = app;
+
+var server = require('http').Server(app);
+
+server.listen(port, function(){
+    console.log('listening on port 5500');
+})
+
+var io = socket(server, {cors: {origin: "*"}});
+
+io.on('connection', (socket) => {
+    console.log(`New Connection ${socket.id}`);
+
+    socket.on('new-user', ((room,name)=>{
+    if (!rooms[room]) {
+        rooms[room] = { users: {} };
+    }
+    console.log('New User')
+        socket.join(room);
+        rooms[room].users[socket.id] = name;
+        socket.to(room).emit('user-connected',name);
+    }))
+
+    socket.on('chat', function(room, data){
+        socket.to(room).emit('chat',data);
+    })
+    socket.on('typing',function(room, data){
+        socket.to(room).emit('typing',data);
+    })
+
+    socket.on('delete-chat',function(room){
+        console.log(delete rooms[room]);
+    })
+})
