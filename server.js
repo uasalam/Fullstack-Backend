@@ -19,7 +19,7 @@ let name = config.name
 //Cors(cross origin request) options are set here
 const corsOptions={
     credentials: true, 
-    origin:['https://pharmacy-backend.netlify.app','http://localhost:4200'],
+    origin:"*",
     //
     //credentials:true,            //access-control-allow-credentials:true
     optionsSuccessStatus:200, // some legacy browsers (IE11, various SmartTVs) choke on 204
